@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For AniList Browse</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+    <script src="https://kit.fontawesome.com/96c6b486e5.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="background__container">
+        <header>
+            <nav>
+                <figure class="nav__img--wrapper">
+                    <img class="nav__img" src="assets/For Anilist Project Logo.png" alt="">
+                </figure>
+                <ul class="nav__links">
+                    <li class="nav__link">
+                        <a class="nav__link--anchor link__hover-effect link__hover-effect--purple purple" href="index.html">Home</a>
+                    </li>
+                    <li class="nav__link">
+                        <a class="nav__link--anchor link__hover-effect" href="#">Search</a>
+                    </li>
+                    <li class="nav__link">
+                        <button class="nav__btn"><a class="nav__link--anchor black" href="#">Contact</a></button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <section id="search">
+            <div class="search__container">
+                <div class="nav__search">
+                    <h2 class="search__title">Browse Your Show</h2>
+                    <form id="form" onsubmit="searchAnime(event)" action="">
+                        <input id="input" placeholder="Search by Name" class="main__input search__input" type="text">
+                        <button id="btn" type="submit" class="main__btn search__btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <figure class="background__img--wrapper">
+            <img src="assets/4258797.jpg" alt="" class="background__img">
+            <a class="background__img--source" href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
+        </figure>
+    </div>
+
+    <section id="anime">
+        <h2 class="search__result">Search results: <span class="search__key purple"></span></h2>
+        <div class="anime__container">
+        </div>
+    </section>
+</body>
+</html>
