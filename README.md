@@ -1,1 +1,1 @@
-# API-FOR-ANILIST-PROJECT
+# Api-For-Anilist-Project
