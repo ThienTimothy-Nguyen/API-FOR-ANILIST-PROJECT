@@ -4,6 +4,7 @@ const searchText = localStorage.getItem("searchText");
 if (searchText) {
   localStorage.removeItem("searchText")
 }
+
 const query1 = `
   query ($search: String) {
     Page(page: 1, perPage: 20) {
@@ -34,7 +35,7 @@ const query2 = `
     }
   }`;
 
-// For later Use
+// json
 
 async function fetchAniList(query, variables = {}) {
   const res = await fetch(url, {
@@ -66,6 +67,7 @@ function animeShow(show) {
     <div class="anime__show">
       <figure class="anime__img--wrapper">
         <img class="anime__img" src="${show.coverImage.large}" alt="${title}">
+        <div class="anime__img--overlay"><i class="fa-regular fa-circle-play"></i></div>
       </figure>
       <div class="anime__show--description">
         <h3 class="anime__show--title">${title}</h3>
@@ -80,12 +82,6 @@ function animeShow(show) {
 
 // Submit Form
 
-function searchKey(searchId) {
-  if (searchText) {
-    searchId = searchText;
-  }
-}
-
 async function searchAnime(event) {
   event.preventDefault();
 
@@ -94,26 +90,30 @@ async function searchAnime(event) {
   const searchTerm = input.value.trim();
 
   if (!searchTerm) return;
-
-  document.querySelector('.search__key').innerHTML = `${searchTerm}`;
-
-  try {
-    const data = await fetchAniList(query1, { search: searchTerm });
-    const list = data.data.Page.media;
-    renderAnimeList(list)}
-  catch (err) {
-    console.error("AniList error:", err);}
+    try {
+      emptyContainer()
+      pageLoading()
+      searchResult()
+      document.querySelector('.search__key').innerHTML = `${searchTerm}`;
+      const data = await fetchAniList(query1, { search: searchTerm });
+      const list = data.data.Page.media;
+      pageLoadingRemove();
+      renderAnimeList(list)}
+    catch (err) {
+      console.error("AniList error:", err);}
 }
 
 // Page Load
 
 (async function loadTrending() {
   if(searchText) {
-    document.querySelector('.search__key').innerHTML = `${searchText}`;
-
     try {
+      searchResult()
+      pageLoading()
+      document.querySelector('.search__key').innerHTML = `${searchText}`
       const data = await fetchAniList(query1, { search: searchText });
       const list = data.data.Page.media;
+      pageLoadingRemove()
       renderAnimeList(list);
     } catch (err) {
       console.error("AniList error:", err);
@@ -121,12 +121,31 @@ async function searchAnime(event) {
   }
   else {
     try {
+      pageLoading()
+      document.querySelector('.search__result').innerHTML = 'POPULAR SHOWS';
       const data = await fetchAniList(query2);
-      renderAnimeList(data.data.Page.media)} 
+      pageLoadingRemove()
+      renderAnimeList(data.data.Page.media);} 
     catch (err) {
       console.error("AniList error:", err);}
   }
 })();
+
+function searchResult() {
+  document.querySelector('.search__result').innerHTML = `Search results: <span class="search__key purple"></span>`;
+}
+
+function pageLoading() {
+  document.querySelector('.anime__container').classList.add('anime__loading')
+}
+
+function pageLoadingRemove() {
+  document.querySelector('.anime__container').classList.remove('anime__loading')
+}
+
+function emptyContainer() {
+  document.querySelector('.anime__container').innerHTML = '<i class="fa-solid fa-spinner anime__loading--spinner"></i>';
+}
 
 
 
