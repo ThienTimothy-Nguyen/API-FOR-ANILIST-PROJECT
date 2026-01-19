@@ -363,7 +363,7 @@ nav {
     width: 0%;
     height: 100%;
     background-color: #242424;
-    opacity: 0.6;
+    opacity: 0.5;
     transition: all 450ms ease;
     z-index: 15;
     display: flex;
@@ -375,6 +375,7 @@ nav {
     font-size: 56px;
     color: white;
     display: none;
+    visibility: hidden;
 }
 
 .anime__img--wrapper:hover .anime__img--overlay {
@@ -383,6 +384,7 @@ nav {
 
 .anime__img--wrapper:hover .fa-circle-play {
     display: block;
+    visibility: visible;
 }
 
 .anime__img {
