@@ -94,11 +94,13 @@ async function searchAnime(event) {
       emptyContainer()
       pageLoading()
       searchResult()
-      document.querySelector('.search__key').innerHTML = `${searchTerm}`;
+      document.querySelector('.search__key').innerHTML = `"${searchTerm}"`;
       const data = await fetchAniList(query1, { search: searchTerm });
       const list = data.data.Page.media;
-      pageLoadingRemove();
-      renderAnimeList(list)}
+      setTimeout(() => {
+        pageLoadingRemove()
+        renderAnimeList(list);
+      }, 1000)}
     catch (err) {
       console.error("AniList error:", err);}
 }
@@ -113,8 +115,11 @@ async function searchAnime(event) {
       document.querySelector('.search__key').innerHTML = `${searchText}`
       const data = await fetchAniList(query1, { search: searchText });
       const list = data.data.Page.media;
-      pageLoadingRemove()
-      renderAnimeList(list);
+      setTimeout(() => {
+        pageLoadingRemove()
+        renderAnimeList(list);
+      }, 1000)
+      
     } catch (err) {
       console.error("AniList error:", err);
     }
@@ -124,8 +129,11 @@ async function searchAnime(event) {
       pageLoading()
       document.querySelector('.search__result').innerHTML = 'POPULAR SHOWS';
       const data = await fetchAniList(query2);
-      pageLoadingRemove()
-      renderAnimeList(data.data.Page.media);} 
+      const list = data.data.Page.media;
+      setTimeout(() => {
+        pageLoadingRemove()
+        renderAnimeList(list);
+      }, 1000)} 
     catch (err) {
       console.error("AniList error:", err);}
   }
