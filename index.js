@@ -3,7 +3,7 @@
 function redirect(searchText) {
     if (!searchText) return;
     localStorage.setItem("searchText",searchText)
-    window.location.href = `${window.location.origin}./anime.html`;
+    window.location.href = `./anime.html`;
 }
 
 function renderSearch(event) {
