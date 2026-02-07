@@ -7,11 +7,15 @@
   transition: all 700ms ease;
 }
 
+.no_cursor {
+    cursor: not-allowed;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-body {
+.body {
   height: 100vh;
   width: 100vw;
   overflow-x: hidden;              
@@ -19,6 +23,10 @@ body {
   color: white;
   display: flex;                 
   flex-direction: column;
+}
+
+.body_anime {
+    height: auto;
 }
 
 ul {
@@ -100,6 +108,8 @@ nav {
 .nav__img {
   width: 100%;
   display: block;
+  z-index: 10;
+  position: relative;
 }
 
 .nav__links {
@@ -226,6 +236,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 14px;
 }
 
 .main__img {
@@ -306,7 +317,6 @@ nav {
     width: 100%;
     position: absolute;
     opacity: 0.6;
-    z-index: -1;
 }
 
 .background__img--source {
@@ -330,6 +340,7 @@ nav {
     flex-direction: column;
     padding: 0 72px;
     justify-content: center;
+    min-height: 60vh;
 }
 
 .anime__container {
@@ -433,16 +444,57 @@ nav {
 
 /* 
 
+    footer
+
+*/
+
+#footer {
+    background-color: #110f11;
+}
+
+.footer__container {
+    padding: 48px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__img--wrapper {
+    max-width: 120px;
+}
+
+.footer__img {
+    width: 100%;
+}
+
+.footer__links {
+    margin: 30px 0;
+    display: flex;
+    gap: 48px;
+}
+
+.footer__link, 
+.footer__copyright {
+    font-size: 18px;
+}
+
+
+/* 
+
     ANIME LOADING
 
 */
+
+.fa-spinner {
+    font-size: 48px;
+    animation: spin 900ms linear infinite;
+}
 
 .anime__loading {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
-    animation: spin 900ms linear infinite;
 }
 
 .anime__loading--spinner {
@@ -620,5 +672,46 @@ TABLETS, LARGE SMART PHONES
     .search__result {
     font-size: 18px;
     font-weight: 300;
+    }
+
+    .footer__link,
+    .footer__copyright {
+        font-size: 14px;
+    }
+
+    .search__title {
+        font-size: 32px;
+    }
 }
+
+/* 
+
+Small Phones 
+
+*/
+
+@media (max-width: 480px) {
+
+    .main__description--title {
+        font-size: 30px;
+    }
+    .background__img {
+        height: 100%;
+    }
+
+    .main__input {
+        width: 274px;
+    }
+
+    .main__btn {
+        transform: translateX(193.5px) translateY(0);
+    }
+
+    header {
+        padding: 0 48px 0 56px;
+    }
+    
+    .nav__link--anchor {
+        font-size: 16px;
+    }
 }

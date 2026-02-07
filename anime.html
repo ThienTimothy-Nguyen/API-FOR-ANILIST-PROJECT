@@ -9,46 +9,65 @@
     <script src="https://kit.fontawesome.com/96c6b486e5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="background__container">
-        <header>
-            <nav>
-                <figure class="nav__img--wrapper">
-                    <img class="nav__img" src="assets/For Anilist Project Logo.png" alt="">
-                </figure>
-                <ul class="nav__links">
-                    <li class="nav__link">
-                        <a class="nav__link--anchor link__hover-effect link__hover-effect--purple purple" href="./index.html">Home</a>
-                    </li>
-                    <li class="nav__link">
-                        <a class="nav__link--anchor link__hover-effect" href="./anime.html">Search</a>
-                    </li>
-                    <li class="nav__link">
-                        <button class="nav__btn"><a class="nav__link--anchor black" href="#">Contact</a></button>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <section id="search">
-            <div class="search__container">
-                <div class="nav__search">
-                    <h2 class="search__title">Browse Your Show</h2>
-                    <form id="form" onsubmit="searchAnime(event)" action="">
-                        <input id="input" placeholder="Search by Name" class="main__input search__input" type="text">
-                        <button id="btn" type="submit" class="main__btn search__btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </form>
+    <div class="body body_anime">
+        <div class="background__container">
+            <header>
+                <nav>
+                    <figure class="nav__img--wrapper">
+                        <img class="nav__img" src="assets/For Anilist Project Logo.png" alt="">
+                    </figure>
+                    <ul class="nav__links">
+                        <li class="nav__link">
+                            <a class="nav__link--anchor link__hover-effect link__hover-effect--purple purple" href="./index.html">Home</a>
+                        </li>
+                        <li class="nav__link">
+                            <a class="nav__link--anchor link__hover-effect" href="./anime.html">Search</a>
+                        </li>
+                        <li class="nav__link">
+                            <button class="nav__btn"><a class="nav__link--anchor black no_cursor" href="">Contact</a></button>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+            <section id="search">
+                <div class="search__container">
+                    <div class="nav__search">
+                        <h2 class="search__title">Browse Your Show</h2>
+                        <form id="form" onsubmit="searchAnime(event)" action="">
+                            <input id="input" placeholder="Search by Name" class="main__input search__input" type="text">
+                            <button id="btn" type="submit" class="main__btn search__btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
+                    </div>
                 </div>
+            </section>
+            <figure class="background__img--wrapper">
+                <img src="assets/4258797.jpg" alt="" class="background__img">
+                <a class="background__img--source" href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
+            </figure>
+        </div>
+
+        <section id="anime">
+            <h2 class="search__result"></span></h2>
+            <div class="anime__container">
+                <i class="fa-solid fa-spinner anime__loading--spinner"></i>
             </div>
         </section>
-        <figure class="background__img--wrapper">
-            <img src="assets/4258797.jpg" alt="" class="background__img">
-            <a class="background__img--source" href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
-        </figure>
     </div>
 
-    <section id="anime">
-        <h2 class="search__result"></span></h2>
-        <div class="anime__container">
-            <i class="fa-solid fa-spinner anime__loading--spinner"></i>
+    <section id="footer">
+        <div class="footer__container">
+            <figure class="footer__img--wrapper">
+                <img class="footer__img" src="./assets/For Anilist Project Logo.png" alt="">
+            </figure>
+            <div class="footer__links">
+                <a href="./index.html" class="footer__link purple link__hover-effect link__hover-effect--purple">Home</a>
+                <a href="" class="footer__link purple no_cursor link__hover-effect--purple">About</a>
+                <a href="" class="footer__link purple no_cursor link__hover-effect--purple">Contact</a>
+                <a href="./anime.html" class="footer__link purple link__hover-effect link__hover-effect--purple">Browse</a>
+            </div>
+            <div class="footer__copyright purple">
+                © For Anilist 2026
+            </div>
         </div>
     </section>
 </body>

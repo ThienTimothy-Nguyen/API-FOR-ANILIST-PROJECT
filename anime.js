@@ -92,12 +92,13 @@ async function searchAnime(event) {
   if (!searchTerm) return;
     try {
       emptyContainer()
+      emptySearchResult()
       pageLoading()
-      searchResult()
-      document.querySelector('.search__key').innerHTML = `"${searchTerm}"`;
       const data = await fetchAniList(query1, { search: searchTerm });
       const list = data.data.Page.media;
       setTimeout(() => {
+        searchResult()
+        document.querySelector('.search__key').innerHTML = `"${searchTerm}"`;
         pageLoadingRemove()
         renderAnimeList(list);
       }, 1000)}
@@ -110,12 +111,12 @@ async function searchAnime(event) {
 (async function loadTrending() {
   if(searchText) {
     try {
-      searchResult()
       pageLoading()
-      document.querySelector('.search__key').innerHTML = `${searchText}`
       const data = await fetchAniList(query1, { search: searchText });
       const list = data.data.Page.media;
       setTimeout(() => {
+        searchResult()
+        document.querySelector('.search__key').innerHTML = `${searchText}`
         pageLoadingRemove()
         renderAnimeList(list);
       }, 1000)
@@ -127,10 +128,10 @@ async function searchAnime(event) {
   else {
     try {
       pageLoading()
-      document.querySelector('.search__result').innerHTML = 'POPULAR SHOWS';
       const data = await fetchAniList(query2);
       const list = data.data.Page.media;
       setTimeout(() => {
+        document.querySelector('.search__result').innerHTML = 'POPULAR SHOWS';
         pageLoadingRemove()
         renderAnimeList(list);
       }, 1000)} 
@@ -143,6 +144,10 @@ function searchResult() {
   document.querySelector('.search__result').innerHTML = `Search results: <span class="search__key purple"></span>`;
 }
 
+function emptySearchResult() {
+  document.querySelector('.search__result').innerHTML = "";
+}
+
 function pageLoading() {
   document.querySelector('.anime__container').classList.add('anime__loading')
 }
@@ -152,7 +157,8 @@ function pageLoadingRemove() {
 }
 
 function emptyContainer() {
-  document.querySelector('.anime__container').innerHTML = '<i class="fa-solid fa-spinner anime__loading--spinner"></i>';
+  document.querySelector('.anime__container').innerHTML = `<i class="fa-solid fa-spinner anime__loading--spinner"></i>`
+
 }
 
 
