@@ -7,7 +7,7 @@ if (searchText) {
 
 const query1 = `
   query ($search: String) {
-    Page(page: 1, perPage: 20) {
+    Page(page: 1, perPage: 10) {
       media(type: ANIME, search: $search, genre_not_in: ["Hentai", "Ecchi"], sort: POPULARITY_DESC) {
         id
         title { romaji english userPreferred }
@@ -67,7 +67,8 @@ function animeShow(show) {
     <div class="anime__show">
       <figure class="anime__img--wrapper">
         <img class="anime__img" src="${show.coverImage.large}" alt="${title}">
-        <div class="anime__img--overlay"><i class="fa-regular fa-circle-play"></i></div>
+        <i class="fa-regular fa-circle-play"></i>
+        <div class="anime__img--overlay"></div>
       </figure>
       <div class="anime__show--description">
         <h3 class="anime__show--title">${title}</h3>
@@ -101,7 +102,24 @@ async function searchAnime(event) {
         document.querySelector('.search__key').innerHTML = `"${searchTerm}"`;
         pageLoadingRemove()
         renderAnimeList(list);
-      }, 1000)}
+      }, 1000)
+      async function filterAnime(event) {
+  const data = await fetchAniList(query2);
+    const list = data.data.Page.media;
+  if (event.target.value === "average_score") {
+    const listByScore = list.sort((a,b) => b.averageScore - a.averageScore)
+    renderAnimeList(listByScore)
+  }
+  else if (event.target.value === "low_to_high") {
+    const listByYear1 = list.sort((a,b) => a.seasonYear - b.seasonYear)
+    renderAnimeList(listByYear1)
+  }
+  else if (event.target.value === "high_to_low") {
+    const listByYear2 = list.sort((a,b) => b.seasonYear - a.seasonYear)
+    renderAnimeList(listByYear2)
+  }
+}
+    }
     catch (err) {
       console.error("AniList error:", err);}
 }
@@ -116,7 +134,7 @@ async function searchAnime(event) {
       const list = data.data.Page.media;
       setTimeout(() => {
         searchResult()
-        document.querySelector('.search__key').innerHTML = `${searchText}`
+        document.querySelector('.search__key').innerHTML = `${searchText}`;
         pageLoadingRemove()
         renderAnimeList(list);
       }, 1000)
@@ -132,6 +150,13 @@ async function searchAnime(event) {
       const list = data.data.Page.media;
       setTimeout(() => {
         document.querySelector('.search__result').innerHTML = 'POPULAR SHOWS';
+        document.querySelector('.filter__container').innerHTML = 
+        `<select name="" id="filter" onchange="filterAnime(event)">
+            <option value="" disabled selected>Sort</option>
+            <option value="average_score">Average score</option>
+            <option value="low_to_high">Earlier released</option>
+            <option value="high_to_low">Latest released</option>
+        </select>`;
         pageLoadingRemove()
         renderAnimeList(list);
       }, 1000)} 
@@ -140,12 +165,30 @@ async function searchAnime(event) {
   }
 })();
 
+async function filterAnime(event) {
+  const data = await fetchAniList(query2);
+    const list = data.data.Page.media;
+  if (event.target.value === "average_score") {
+    const listByScore = list.sort((a,b) => b.averageScore - a.averageScore)
+    renderAnimeList(listByScore)
+  }
+  else if (event.target.value === "low_to_high") {
+    const listByYear1 = list.sort((a,b) => a.seasonYear - b.seasonYear)
+    renderAnimeList(listByYear1)
+  }
+  else if (event.target.value === "high_to_low") {
+    const listByYear2 = list.sort((a,b) => b.seasonYear - a.seasonYear)
+    renderAnimeList(listByYear2)
+  }
+}
+
 function searchResult() {
   document.querySelector('.search__result').innerHTML = `Search results: <span class="search__key purple"></span>`;
 }
 
 function emptySearchResult() {
   document.querySelector('.search__result').innerHTML = "";
+  document.querySelector('.filter__container').innerHTML = "";
 }
 
 function pageLoading() {
